@@ -271,8 +271,8 @@ include $(BUILD_PREBUILT)
 include $(CLEAR_VARS)
 LOCAL_MODULE := datastatusnotification
 LOCAL_MODULE_OWNER := lge
-LOCAL_SRC_FILES := proprietary/app/datastatusnotification/datastatusnotification.apk
-LOCAL_CERTIFICATE := platform
+LOCAL_SRC_FILES := vendorimage/app/datastatusnotification/datastatusnotification.apk
+LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
@@ -282,12 +282,32 @@ include $(BUILD_PREBUILT)
 include $(CLEAR_VARS)
 LOCAL_MODULE := ims
 LOCAL_MODULE_OWNER := lge
-LOCAL_SRC_FILES := proprietary/app/ims/ims.apk
-LOCAL_CERTIFICATE := platform
+LOCAL_SRC_FILES := vendorimage/app/ims/ims.apk
+LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
 LOCAL_DEX_PREOPT := false
 LOCAL_MODULE_SUFFIX := .apk
 include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := VendorLinks
+LOCAL_MODULE_OWNER := lge
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_POST_INSTALL_CMD := \
+	test -s vendor/lge/bullhead/proprietary/prebuilt/target/product/msm8992/system/etc/izat.conf || { \
+	mkdir -p $(PRODUCT_OUT)/system/app/ims/lib/arm64; \
+	ln -sf /vendor/lib64/libimscamera_jni.so $(PRODUCT_OUT)/system/app/ims/lib/arm64/libimscamera_jni.so; \
+	ln -sf /vendor/lib64/libimsmedia_jni.so $(PRODUCT_OUT)/system/app/ims/lib/arm64/libimsmedia_jni.so; \
+	mkdir -p $(PRODUCT_OUT)/vendor/lib64; \
+	ln -sf /vendor/lib64/egl/eglSubDriverAndroid.so $(PRODUCT_OUT)/vendor/lib64/eglSubDriverAndroid.so; \
+	ln -sf /vendor/lib64/egl/libEGL_adreno.so $(PRODUCT_OUT)/vendor/lib64/libEGL_adreno.so; \
+	ln -sf /vendor/lib64/egl/libGLESv1_CM_adreno.so $(PRODUCT_OUT)/vendor/lib64/libGLESv1_CM_adreno.so; \
+	ln -sf /vendor/lib64/egl/libGLESv2_adreno.so $(PRODUCT_OUT)/vendor/lib64/libGLESv2_adreno.so; \
+	ln -sf /vendor/lib64/egl/libq3dtools_adreno.so $(PRODUCT_OUT)/vendor/lib64/libq3dtools_adreno.so; \
+	ln -sf /vendor/lib64/egl/libq3dtools_esx.so $(PRODUCT_OUT)/vendor/lib64/libq3dtools_esx.so; }
+
+include $(BUILD_PHONY_PACKAGE)
 
 endif

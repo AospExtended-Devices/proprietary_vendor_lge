@@ -6,7 +6,7 @@ PRODUCT_COPY_FILES += \
 	vendor/lge/bullhead/vendorimage/bin/qseecomd:vendor/bin/qseecomd \
 	vendor/lge/bullhead/vendorimage/bin/qti:vendor/bin/qti \
 	vendor/lge/bullhead/vendorimage/bin/slim_daemon:vendor/bin/slim_daemon \
-	vendor/lge/bullhead/vendorimage/etc/audio_effects.conf:vendor/etc/audio_effects.conf \
+#	vendor/lge/bullhead/vendorimage/etc/audio_effects.conf:vendor/etc/audio_effects.conf \
 	vendor/lge/bullhead/vendorimage/etc/msm_irqbalance.conf:vendor/etc/msm_irqbalance.conf \
 	vendor/lge/bullhead/vendorimage/etc/perf-profile0.conf:vendor/etc/perf-profile0.conf \
 	vendor/lge/bullhead/vendorimage/firmware/a420_pfp.fw:vendor/firmware/a420_pfp.fw \
